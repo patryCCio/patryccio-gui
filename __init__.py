@@ -20,7 +20,7 @@ if addon_path not in sys.path:
 from . import visible
 from . import cameras
 from . import bone_edit
-from . import bone_edit2
+from . import bone_proportial
 from . import shapekeys
 from . import vertex
 
@@ -28,7 +28,7 @@ modules = [
     visible,
     cameras,
     bone_edit,
-    bone_edit2,
+    bone_proportial,
     shapekeys,
     vertex,
 ]
