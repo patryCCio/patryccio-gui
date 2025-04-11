@@ -31,7 +31,7 @@ class BoneFromVertexOperator(bpy.types.Operator):
         bpy.ops.object.mode_set(mode='OBJECT')
 
         if not world_positions:
-            self.report({'ERROR'}, "Nie zaznaczono żadnych wierzchołków!")
+            self.report({'ERROR'}, "Nie zaznaczono żadnych wierzchołkóww!")
             return {'CANCELLED'}
 
         bpy.context.view_layer.objects.active = arm_obj
