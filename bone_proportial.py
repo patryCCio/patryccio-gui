@@ -149,7 +149,8 @@ class POSE_PT_proportional_move(bpy.types.Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
     bl_category = "GUI PatryCCio"
-    # bl_parent_id= 'VIEW3D_PT_bone_edit'
+    bl_idname = 'POSE_PT_proportional_move'
+    bl_parent_id= 'VIEW3D_PT_bone_edit'
 
     @classmethod
     def poll(cls, context):
