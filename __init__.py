@@ -19,7 +19,9 @@ if addon_path not in sys.path:
 
 from . import visible
 from . import cameras
+from . import texture_baker
 from . import bone_edit
+from . import bone_nearest
 from . import bone_proportial
 from . import shapekeys
 from . import vertex
@@ -27,7 +29,9 @@ from . import vertex
 modules = [
     visible,
     cameras,
+    texture_baker,
     bone_edit,
+    bone_nearest,
     bone_proportial,
     shapekeys,
     vertex,
