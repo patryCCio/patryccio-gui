@@ -7,23 +7,28 @@ addon_keymaps = []
 class BoneNearestProps(bpy.types.PropertyGroup):
     use_bone_nearest: bpy.props.BoolProperty(name="Enable Shortcuts", default=False)
 
-# Funkcja do pobrania kości na podstawie wag
 def get_bone_from_weights(obj, face_index, hit_location_world):
-    mesh = obj.data
+    depsgraph = bpy.context.evaluated_depsgraph_get()
+    eval_obj = obj.evaluated_get(depsgraph)
+    mesh = eval_obj.to_mesh()
     mesh.calc_loop_triangles()
 
-    face = mesh.polygons[face_index]
+    try:
+        face = mesh.polygons[face_index]
+    except IndexError:
+        eval_obj.to_mesh_clear()
+        return []
+
     closest_vert_idx = min(
         face.vertices,
         key=lambda i: (obj.matrix_world @ mesh.vertices[i].co - hit_location_world).length
     )
 
     vertex = mesh.vertices[closest_vert_idx]
-
-    # posortuj grupy po największym wpływie
     sorted_groups = sorted(vertex.groups, key=lambda g: g.weight, reverse=True)
-
     bone_names = [obj.vertex_groups[g.group].name for g in sorted_groups]
+
+    eval_obj.to_mesh_clear()
     return bone_names
 
 class VIEW3D_OT_pick_weighted_bone(bpy.types.Operator):
